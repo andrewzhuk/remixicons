@@ -1,0 +1,22 @@
+{
+  "name": "@remixicons/vue",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/andrewzhuk/remixicons#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewzhuk/remixicons.git"
+  },
+  "files": [
+    "line",
+    "fill"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "vue": ">= 3"
+  }
+}

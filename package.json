@@ -1,0 +1,41 @@
+{
+  "name": "remixicons",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Zhuk"
+  },
+  "repository": {
+    "url": "git+https://github.com/andrewzhuk/remixicons.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/andrewzhuk/remixicons/issues"
+  },
+  "files": [
+    "line/",
+    "fill/",
+    "README.md"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "npm run build-line && npm run build-fill && npm run build-react && npm run build-vue",
+    "build-react": "node ./scripts/build.js react",
+    "build-vue": "node ./scripts/build.js vue",
+    "geticons": "node ./scripts/script.js",
+    "build-line": "rimraf ./line ./optimized/line && svgo --config=svgo.line.yaml -f ./src/line -o ./optimized/line --pretty --indent=2 && cp -R ./optimized/line ./line",
+    "build-fill": "rimraf ./fill ./optimized/fill && svgo --config=svgo.fill.yaml -f ./src/fill -o ./optimized/fill --pretty --indent=2 && cp -R ./optimized/fill ./fill"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-react-jsx": "^7.12.12",
+    "@svgr/core": "^5.5.0",
+    "@vue/compiler-dom": "^3.0.5",
+    "adm-zip": "^0.5.9",
+    "camelcase": "^6.0.0",
+    "prompt": "^1.3.0",
+    "rimraf": "^3.0.2",
+    "superagent": "^7.1.3",
+    "svgo": "^1.3.2"
+  }
+}
