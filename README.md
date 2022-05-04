@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/andrewzhuk/remixicons/master/.github/logo.svg" alt="Remixicons">
+  <img src="https://raw.githubusercontent.com/andrewzhuk/remixicons/master/.github/logo.png" alt="Remixicons">
 </p>
 
 <p align="center">
