@@ -83,6 +83,31 @@ The 24x24 line icons can be imported from `@remixicons/vue/line`, and the 24x24 
 
 Icons use an upper camel case naming convention and are always postfixed with the word `Icon`.
 
+
+## Important Note About Numeric Icons
+
+When using icons that start with numbers (e.g., "24HoursIcon"), you need to use them with an underscore prefix in your code:
+
+```jsx
+// React
+import { _24HoursIcon } from '@remixicons/react'
+
+function MyComponent() {
+  return <_24HoursIcon className="h-6 w-6" />
+}
+```
+
+```vue
+<!-- Vue -->
+import { _24HoursIcon } from '@remixicons/vue'
+
+<template>
+  <_24HoursIcon class="h-6 w-6" />
+</template>
+```
+
+This is because JavaScript identifiers cannot start with numbers. All numeric icons in our library are automatically prefixed with an underscore to make them valid JavaScript identifiers.
+
 ## License
 
 This library is MIT licensed.
