@@ -18,8 +18,7 @@ prompt.get(properties, function (err, result) {
     return onErr(err);
   }
   const version = result.version;
-
-  const href = `https://cdn.remixicon.com/releases/`;
+  const href = `https://github.com/Remix-Design/RemixIcon/releases/download/v${version}`;
   const zipFile = `RemixIcon_SVG_v${version}.zip`;
   const source = `${href}/${zipFile}`;
   request

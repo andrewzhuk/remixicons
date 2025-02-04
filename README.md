@@ -21,7 +21,6 @@
 
 The quickest way to use these icons is to simply copy the source for the icon you need from [https://remixicon.com](https://remixicon.com) and inline it directly into your HTML:
 
-
 Both icon styles are preconfigured to be stylable by setting the `color` CSS property, either manually or using utility classes like `fill-gray-500` in a framework like [Tailwind CSS](https://tailwindcss.com).
 
 ## React
@@ -50,7 +49,6 @@ function MyComponent() {
 The 24x24 line icons can be imported from `@remixicons/react/line`, and the 24x24 fill icons can be imported from `@remixicons/react/fill`.
 
 Icons use an upper camel case naming convention and are always postfixed with the word `Icon`.
-
 
 ## Vue
 
@@ -84,7 +82,6 @@ export default {
 The 24x24 line icons can be imported from `@remixicons/vue/line`, and the 24x24 fill icons can be imported from `@remixicons/vue/fill`.
 
 Icons use an upper camel case naming convention and are always postfixed with the word `Icon`.
-
 
 ## License
 

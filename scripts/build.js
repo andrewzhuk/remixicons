@@ -9,6 +9,10 @@ const { dirname } = require('path')
 
 let transform = {
   react: async (svg, componentName, format) => {
+    // Add an underscore to numbers that start with one
+    if (/^\d/.test(componentName)) {
+      componentName = `_${componentName}`;
+    }
     let component = await svgr(svg, { ref: true }, { componentName })
     let { code } = await babel.transformAsync(component, {
       plugins: [[require('@babel/plugin-transform-react-jsx'), { useBuiltIns: true }]],
@@ -23,6 +27,10 @@ let transform = {
       .replace('export default', 'module.exports =')
   },
   vue: (svg, componentName, format) => {
+    // Add an underscore to numbers that start with one
+    if (/^\d/.test(componentName)) {
+      componentName = `_${componentName}`;
+    }
     let { code } = compileVue(svg, {
       mode: 'module',
     })
@@ -47,6 +55,44 @@ let transform = {
   },
 }
 
+class Semaphore {
+  constructor(max) {
+    this.max = max
+    this.count = 0
+    this.queue = []
+  }
+
+  async acquire() {
+    if (this.count < this.max) {
+      this.count++
+      return Promise.resolve()
+    }
+
+    return new Promise(resolve => this.queue.push(resolve))
+  }
+
+  release() {
+    this.count--
+    if (this.queue.length > 0) {
+      this.count++
+      const next = this.queue.shift()
+      next()
+    }
+  }
+}
+
+const fileSemaphore = new Semaphore(50)
+
+async function ensureWrite(file, text) {
+  await fileSemaphore.acquire()
+  try {
+    await fs.mkdir(dirname(file), { recursive: true })
+    await fs.writeFile(file, text, 'utf8')
+  } finally {
+    fileSemaphore.release()
+  }
+}
+
 async function getIcons(style) {
   let files = await fs.readdir(`./optimized/${style}`)
   return Promise.all(
@@ -69,11 +115,6 @@ function exportAll(icons, format, includeExtension = true) {
       return `module.exports.${componentName} = require("./${componentName}${extension}")`
     })
     .join('\n')
-}
-
-async function ensureWrite(file, text) {
-  await fs.mkdir(dirname(file), { recursive: true })
-  await fs.writeFile(file, text, 'utf8')
 }
 
 async function ensureWriteJson(file, json) {
